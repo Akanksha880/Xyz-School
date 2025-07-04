@@ -1,4 +1,0 @@
-# Xyz-School
-
-
-School Website
