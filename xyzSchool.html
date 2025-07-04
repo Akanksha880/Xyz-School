@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYZ International School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f);
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hamburger {
+            display: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 2rem;
+        }
+
+        #home h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .cta-btn {
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: #ffd700;
+            color: #1a2a6c;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            background: #ffcc00;
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 6rem 3rem;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            color: #1a2a6c;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #b21f1f;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3rem;
+        }
+
+        #about .about-text {
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        #about .about-image {
+            flex: 1;
+        }
+
+        #about .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Academics Section */
+        #academics {
+            background: #f9f9f9;
+        }
+
+        .academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .academic-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .academic-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .academic-card h3 {
+            font-size: 1.5rem;
+            color: #b21f1f;
+            margin-bottom: 1rem;
+        }
+
+        /* Admissions Section */
+        #admissions .admission-details {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        #admissions ul {
+            list-style: disc;
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        #admissions .download-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: #1a2a6c;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        /* Events Section */
+        #events .event-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .event-item {
+            background: #fff;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid #b21f1f;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gallery Section */
+        #gallery {
+            background: #f9f9f9;
+        }
+
+        .gallery-slider {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            text-align: center;
+        }
+
+        .slide img {
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Contact Section */
+        #contact .contact-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3rem;
+        }
+
+        #contact form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        #contact input, #contact textarea {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        #contact textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        #contact button {
+            padding: 1rem;
+            background: #b21f1f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #contact button:hover {
+            background: #8e1a1a;
+        }
+
+        #contact .contact-info {
+            flex: 1;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a2a6c;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #1a2a6c;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            #home h1 {
+                font-size: 2.5rem;
+            }
+
+            #home p {
+                font-size: 1.2rem;
+            }
+
+            #about .about-content {
+                flex-direction: column;
+            }
+
+            .academic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #contact .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">XYZ International School</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#academics">Academics</a></li>
+            <li><a href="#admissions">Admissions</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">☰</div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Welcome to XYZ International School</h1>
+        <p>A premier institution fostering academic excellence, creativity, and leadership for the leaders of tomorrow.</p>
+        <button class="cta-btn">Explore More</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Founded in 1990, XYZ International School is committed to providing a nurturing environment where students thrive academically and personally. Our mission is to empower students with knowledge, skills, and values to succeed in a global world.</p>
+                <p>With state-of-the-art facilities and a dedicated faculty, we offer a balanced curriculum that blends academics with extracurricular activities.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://via.placeholder.com/600x400" alt="School Building">
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics">
+        <h2>Academics</h2>
+        <div class="academic-grid">
+            <div class="academic-card">
+                <h3>Primary Education</h3>
+                <p>Foundational learning for grades 1-5 with a focus on literacy, numeracy, and creativity.</p>
+            </div>
+            <div class="academic-card">
+                <h3>Secondary Education</h3>
+                <p>Advanced curriculum for grades 6-12, preparing students for higher education and beyond.</p>
+            </div>
+            <div class="academic-card">
+                <h3>Extracurriculars</h3>
+                <p>Sports, arts, music, and clubs to develop well-rounded individuals.</p>
+            </div>
+            <div class="academic-card">
+                <h3>Special Programs</h3>
+                <p>STEM, language immersion, and leadership training for specialized growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admissions Section -->
+    <section id="admissions">
+        <h2>Admissions</h2>
+        <div class="admission-details">
+            <p>Admission for the 2025-26 academic year is now open. Follow these steps:</p>
+            <ul>
+                <li>Fill out the online application form.</li>
+                <li>Submit required documents (birth certificate, previous report cards).</li>
+                <li>Attend an entrance test and interview.</li>
+                <li>Pay the admission fee upon acceptance.</li>
+            </ul>
+            <a href="#" class="download-btn" onclick="alert('Download link coming soon!')">Download Admission Form</a>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events">
+        <h2>Upcoming Events</h2>
+        <div class="event-container">
+            <div class="event-item">
+                <h3>Annual Day Celebration</h3>
+                <p>Date: 20th December 2025 | Time: 5:00 PM | Venue: School Auditorium</p>
+            </div>
+            <div class="event-item">
+                <h3>Sports Day</h3>
+                <p>Date: 15th January 2026 | Time: 9:00 AM | Venue: School Ground</p>
+            </div>
+            <div class="event-item">
+                <h3>Science Fair</h3>
+                <p>Date: 10th February 2026 | Time: 10:00 AM | Venue: Science Labs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-slider">
+            <div class="slides">
+                <div class="slide"><img src="https://via.placeholder.com/800x400?text=Event+1" alt="Event 1"></div>
+                <div class="slide"><img src="https://via.placeholder.com/800x400?text=Classroom" alt="Classroom"></div>
+                <div class="slide"><img src="https://via.placeholder.com/800x400?text=Sports" alt="Sports"></div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <form id="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <p><strong>Address:</strong> 123 School Road, New Delhi, India</p>
+                <p><strong>Email:</strong> info@xyzschool.com</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Office Hours:</strong> Mon-Fri, 9:00 AM - 4:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 XYZ International School. All rights reserved. | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Contact Form Submission
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will respond soon.');
+            form.reset();
+        });
+
+        // Gallery Slider
+        const slides = document.querySelector('.slides');
+        const slide = document.querySelectorAll('.slide');
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            if (index >= slide.length) currentIndex = 0;
+            if (index < 0) currentIndex = slide.length - 1;
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        next.addEventListener('click', () => {
+            currentIndex++;
+            showSlide(currentIndex);
+        });
+
+        prev.addEventListener('click', () => {
+            currentIndex--;
+            showSlide(currentIndex);
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentIndex++;
+            showSlide(currentIndex);
+        }, 5000);
+
+        // CTA Button Animation
+        const ctaBtn = document.querySelector('.cta-btn');
+        ctaBtn.addEventListener('click', () => {
+            document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
